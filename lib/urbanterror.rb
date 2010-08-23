@@ -94,6 +94,5 @@ class UrbanTerror
       match[number][0]
     end
   end
-  
 end
 # puts UrbanTerror.matchType 3
