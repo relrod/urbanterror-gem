@@ -77,32 +77,23 @@ class UrbanTerror
   
   def self.matchType(number, abbreviate=false)
     # 0=FreeForAll, 3=TeamDeathMatch, 4=Team Survivor, 5=Follow the Leader, 6=Capture and Hold, 7=Capture The Flag, 8=Bombmode
-    if abbreviate
-      match = {
-        0 => 'FFA',
-        3 => 'TDM',
-        4 => 'TS',
-        5 => 'FTL',
-        6 => 'CAH',
-        7 => 'CTF',
-        8 => 'BOMB'
-      }
-    else
-      match = {
-        0 => 'Free For All',
-        3 => 'Team Death Match',
-        4 => 'Team Survivor',
-        5 => 'Follow the Leader',
-        6 => 'Capture and Hold',
-        7 => 'Capture the Flag',
-        8 => 'Bomb Mode'
-      }
-    end
+    match = {
+      0 => ['Free For All', 'FFA'],
+      3 => ['Team Death Match', 'TDM'],
+      4 => ['Team Survivor', 'TS'],
+      5 => ['Follow the Leader', 'FTL'],
+      6 => ['Capture and Hold', 'CAH'],
+      7 => ['Capture the Flag', 'CTF'],
+      8 => ['Bomb mode', 'BOMB']
+    }
   
     throw "#{number} is not a valid gametype." if not match.has_key? number
-    match[number]
+    if abbreviate
+      match[number][1]
+    else
+      match[number][0]
+    end
   end
   
 end
-
 # puts UrbanTerror.matchType 3
