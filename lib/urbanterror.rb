@@ -42,7 +42,6 @@ class UrbanTerror
   # name, score, ping.
   def players
     results = getparts("status", 2..-1)
-    return results
     results.map do |player|
       player = player.split(" ", 3)
       {
