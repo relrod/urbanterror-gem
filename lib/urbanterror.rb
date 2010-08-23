@@ -42,6 +42,7 @@ class UrbanTerror
   # name, score, ping.
   def players
     results = getparts("status", 2..-1)
+    return results
     results.map do |player|
       player = player.split(" ", 3)
       {
@@ -74,4 +75,23 @@ class UrbanTerror
     selected_i = selected.inject(:+)
     return initial - selected_i
   end
+  
+  def self.matchType(number)
+    # 0=FreeForAll, 3=TeamDeathMatch, 4=Team Survivor, 5=Follow the Leader, 6=Capture and Hold, 7=Capture The Flag, 8=Bombmode
+    match = {
+      0 => 'Free For All',
+      3 => 'Team Death Match',
+      4 => 'Team Survivor',
+      5 => 'Follow the Leader',
+      6 => 'Capture and Hold',
+      7 => 'Capture the Flag',
+      8 => 'Bomb Mode'
+    }
+  
+    throw "#{number} is not a valid gametype." if not match.has_key? number
+    match[number]
+  end
+  
 end
+
+# puts UrbanTerror.matchType 3
