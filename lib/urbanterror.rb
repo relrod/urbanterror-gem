@@ -52,65 +52,37 @@ class UrbanTerror
     end
   end
   
+  GEAR_TYPES = {
+    'grenades' => 1,
+    'snipers'  => 2,
+    'spas'     => 4,
+    'pistols'  => 8,
+    'autos'    => 16,
+    'negev'    => 32
+  }
+
+  MAX_GEAR = 63
+  
   def self.gearCalc(gearArray)
-    initial = 63
-    selected_i = 0
-    selected = []
-    gearMaster = {
-      'grenades' => 1,
-      'snipers'  => 2,
-      'spas'     => 4,
-      'pistols'  => 8,
-      'autos'    => 16,
-      'negev'    => 32
-    }
-
-    gearArray.each do |w|
-      if gearMaster.has_key? w
-        selected << gearMaster[w]
-      end
-    end
-
-    selected_i = selected.inject(:+)
-    return initial - selected_i
+    MAX_GEAR - gearArray.select{|w| GEAR_TYPES.has_key? w }.reduce(:+)
   end
   
   def self.reverseGearCalc(number)
-    weapons = []
-    gearMaster = {
-      1 => 'grenades',
-      2 => 'snipers',
-      4 => 'spas',
-      8 => 'pistols',
-      16 => 'autos',
-      32 => 'negev'
-    }
-    
-    gearMaster.each do |num, weapon|
-      if number & num == 0
-        weapons << weapon
-      end
-    end
-    return weapons
+    GEAR_TYPES.select{|weapon, gear_val| number & gear_val == 0 }.map(&:first)
   end
+
+  GAME_MODES = {
+    0 => ['Free For All',      'FFA'],
+    3 => ['Team Death Match',  'TDM'],
+    4 => ['Team Survivor',     'TS'],
+    5 => ['Follow the Leader', 'FTL'],
+    6 => ['Capture and Hold',  'CAH'],
+    7 => ['Capture the Flag',  'CTF'],
+    8 => ['Bomb mode',         'BOMB']
+  }
   
   def self.matchType(number, abbreviate=false)
-    # 0=FreeForAll, 3=TeamDeathMatch, 4=Team Survivor, 5=Follow the Leader, 6=Capture and Hold, 7=Capture The Flag, 8=Bombmode
-    match = {
-      0 => ['Free For All', 'FFA'],
-      3 => ['Team Death Match', 'TDM'],
-      4 => ['Team Survivor', 'TS'],
-      5 => ['Follow the Leader', 'FTL'],
-      6 => ['Capture and Hold', 'CAH'],
-      7 => ['Capture the Flag', 'CTF'],
-      8 => ['Bomb mode', 'BOMB']
-    }
-  
-    throw "#{number} is not a valid gametype." if not match.has_key? number
-    if abbreviate
-      match[number][1]
-    else
-      match[number][0]
-    end
+    raise "#{number} is not a valid gametype." unless GAME_MODES.has_key? number
+    match[number][abbreviate ? 1 : 0]
   end  
 end
