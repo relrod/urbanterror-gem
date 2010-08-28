@@ -75,6 +75,25 @@ class UrbanTerror
     return initial - selected_i
   end
   
+  def self.reverseGearCalc(number)
+    weapons = []
+    gearMaster = {
+      1 => 'grenades',
+      2 => 'snipers',
+      4 => 'spas',
+      8 => 'pistols',
+      16 => 'autos',
+      32 => 'negev'
+    }
+    
+    gearMaster.each do |num, weapon|
+      if number & num == 0
+        weapons << weapon
+      end
+    end
+    return weapons
+  end
+  
   def self.matchType(number, abbreviate=false)
     # 0=FreeForAll, 3=TeamDeathMatch, 4=Team Survivor, 5=Follow the Leader, 6=Capture and Hold, 7=Capture The Flag, 8=Bombmode
     match = {
@@ -93,6 +112,5 @@ class UrbanTerror
     else
       match[number][0]
     end
-  end
+  end  
 end
-# puts UrbanTerror.matchType 3
