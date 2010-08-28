@@ -64,7 +64,7 @@ class UrbanTerror
   MAX_GEAR = 63
   
   def self.gearCalc(gearArray)
-    MAX_GEAR - gearArray.select{|w| GEAR_TYPES.has_key? w }.reduce(:+)
+    MAX_GEAR - gearArray.select{|w| GEAR_TYPES.has_key? w }.map{|w| GEAR_TYPES[w] }.reduce(:+)
   end
   
   def self.reverseGearCalc(number)
