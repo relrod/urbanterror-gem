@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'urbanterror'
-  s.version = '0.5'
-  s.date = '2010-08-28'
+  s.version = '1.0'
+  s.date = '2010-08-29'
   s.authors = ['Ricky Elrod']
   s.email = 'ricky@elrod.me'
   s.summary = 'Provides a class to access and control Urban Terror servers via RCON over UDP.'

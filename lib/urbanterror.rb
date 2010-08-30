@@ -64,10 +64,12 @@ class UrbanTerror
   MAX_GEAR = 63
   
   def self.gearCalc(gearArray)
-    MAX_GEAR - gearArray.select{|w| GEAR_TYPES.has_key? w }.map{|w| GEAR_TYPES[w] }.reduce(:+)
+    gearArray.each{ |w| raise "No such gear type '#{w}'" unless GEAR_TYPES.has_key?(w) }
+    MAX_GEAR - gearArray.map{|w| GEAR_TYPES[w] }.reduce(:+)
   end
   
   def self.reverseGearCalc(number)
+    raise "#{number} is outside of the range 0 to 63." unless (0..63).include?(number)
     GEAR_TYPES.select{|weapon, gear_val| number & gear_val == 0 }.map(&:first)
   end
 
@@ -83,6 +85,6 @@ class UrbanTerror
   
   def self.matchType(number, abbreviate=false)
     raise "#{number} is not a valid gametype." unless GAME_MODES.has_key? number
-    match[number][abbreviate ? 1 : 0]
+    GAME_MODES[number][abbreviate ? 1 : 0]
   end  
 end
