@@ -53,6 +53,7 @@ class UrbanTerror
   end
   
   GEAR_TYPES = {
+    'knives'   => 0,
     'grenades' => 1,
     'snipers'  => 2,
     'spas'     => 4,
