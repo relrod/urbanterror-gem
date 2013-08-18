@@ -78,7 +78,8 @@ class UrbanTerror
     5 => ['Follow the Leader', 'FTL'],
     6 => ['Capture and Hold',  'CAH'],
     7 => ['Capture the Flag',  'CTF'],
-    8 => ['Bomb mode',         'BOMB']
+    8 => ['Bomb mode',         'BOMB'],
+    9 => ['Jump mode',         'JUMP']
   }
   
   def self.match_type(number, abbreviate=false)
