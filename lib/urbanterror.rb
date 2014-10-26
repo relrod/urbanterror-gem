@@ -79,7 +79,8 @@ class UrbanTerror
     6 => ['Capture and Hold',  'CAH'],
     7 => ['Capture the Flag',  'CTF'],
     8 => ['Bomb mode',         'BOMB'],
-    9 => ['Jump mode',         'JUMP']
+    9 => ['Jump mode',         'JUMP'],
+    10 => ['Freeze Tag',       'FREEZE']
   }
   
   def self.match_type(number, abbreviate=false)
